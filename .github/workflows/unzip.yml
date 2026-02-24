@@ -1,0 +1,20 @@
+name: Unzip
+on: push
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: List files
+        run: ls -la
+      - name: Unzip
+        run: |
+          unzip web.zip -d ./web
+          rm web.zip
+      - name: Commit
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add .
+          git commit -m "unzipped"
+          git push
